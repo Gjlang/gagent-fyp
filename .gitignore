@@ -1,0 +1,32 @@
+# Environment files
+.env
+*.env
+
+# Laravel
+/backend-laravel/vendor/
+/backend-laravel/node_modules/
+/backend-laravel/storage/logs/
+/backend-laravel/bootstrap/cache/
+
+# Python
+/ai-service/venv/
+/ai-service/__pycache__/
+*.pyc
+
+# Data and reports
+/datasets/*
+/reports/*
+/storage-local/*
+
+# Keep folder placeholders
+!/datasets/.gitkeep
+!/reports/.gitkeep
+!/storage-local/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
