@@ -1,22 +1,40 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from app.routes import router
+
 
 app = FastAPI(
     title="GAgent AI Service",
-    description="Initial FastAPI service for GAgent UX friction detection.",
-    version="0.1.0"
+    description="FastAPI service for UX friction prediction using the trained GAgent ML model.",
+    version="0.5.0",
 )
 
-@app.get("/")
-def root():
-    return {
-        "message": "GAgent AI Service is running",
-        "phase": "Phase 1",
-        "status": "ok"
-    }
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://127.0.0.1:8000",
+        "http://localhost:8000",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-@app.get("/health")
-def health_check():
+app.include_router(router)
+
+
+@app.get("/")
+def root() -> dict:
     return {
-        "service": "gagent-ai-service",
-        "status": "healthy"
+        "service": "GAgent AI Service",
+        "phase": "Phase 5",
+        "status": "running",
+        "available_endpoints": [
+            "/health",
+            "/model-info",
+            "/predict",
+            "/batch-predict",
+            "/docs",
+        ],
     }
